@@ -216,7 +216,6 @@ const MultiplicationGame = () => {
 
   // Handle answer selection
   const handleAnswer = (selectedAnswer) => {
-    debugger;
     // Clear timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -230,9 +229,9 @@ const MultiplicationGame = () => {
     const questionData = {
       multiplicand: currentQuestion.multiplicand,
       multiplier: currentQuestion.multiplier,
-      correctAnswer: currentQuestion.correctAnswer
+      correctAnswer: currentQuestion.correctAnswer,
     };
-    
+
     console.log("Current Question inside handle answer", questionData);
     const isCorrect = selectedAnswer === questionData.correctAnswer;
 
@@ -246,7 +245,9 @@ const MultiplicationGame = () => {
     // Set feedback - always show correct answer when time is up or wrong answer
     setFeedback({
       isCorrect,
-      message: isCorrect ? "Correct!" : `Oops! The answer is ${questionData.correctAnswer}`,
+      message: isCorrect
+        ? "Correct!"
+        : `Oops! The answer is ${questionData.correctAnswer}`,
       question: `${questionData.multiplicand} × ${questionData.multiplier}`,
     });
 
@@ -303,7 +304,7 @@ const MultiplicationGame = () => {
       const timerRefCopy = timerRef.current;
       timerRef.current = null;
       clearInterval(timerRefCopy);
-      
+
       // Pass null to indicate time's up
       handleAnswer(null);
     }
